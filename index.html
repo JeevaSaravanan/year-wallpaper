@@ -8,7 +8,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #020b22;
+    background: #03164a;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,16 +17,11 @@
   }
 
   #wallpaper {
-    width: 402px;
-    height: 874px;
+    width: 100vw;
+    height: 100vh;
     position: relative;
     overflow: hidden;
     background: #03164a;
-    border-radius: 52px;
-    box-shadow:
-      0 0 0 1px rgba(100,140,255,0.15),
-      0 40px 120px rgba(0,0,0,0.85),
-      0 0 80px rgba(0,50,180,0.35);
   }
 
   /* Background */
@@ -34,10 +29,11 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 55% at 50% -5%, rgba(20,70,200,0.75) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 15% 85%, rgba(0,40,160,0.5) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 40% at 85% 70%, rgba(10,50,180,0.35) 0%, transparent 55%),
-      linear-gradient(170deg, #04194f 0%, #031440 40%, #020e30 100%);
+      radial-gradient(ellipse 100% 60% at 50% 0%, rgba(30,90,230,0.85) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 50% at 0% 100%, rgba(10,50,190,0.65) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 100% 80%, rgba(20,60,200,0.5) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(40,90,220,0.25) 0%, transparent 60%),
+      linear-gradient(170deg, #062060 0%, #041850 40%, #021030 100%);
   }
 
   /* Orbs — static, no animation */
@@ -86,7 +82,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 34px;
+    padding: 220px 120px;
   }
 
   /* Header */
