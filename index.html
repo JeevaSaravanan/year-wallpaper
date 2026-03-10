@@ -2,29 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Force exact 390px wide logical viewport (iPhone 16 Pro) -->
+<meta name="viewport" content="width=390, initial-scale=1.0">
 <title>Year Progress Wallpaper</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: #03164a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  html, body {
+    width: 390px;
+    height: 844px;
+    overflow: hidden;
     font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  #wallpaper {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
+  body {
     background: #03164a;
   }
 
-  /* Background */
+  #wallpaper {
+    width: 390px;
+    height: 844px;
+    position: relative;
+    overflow: hidden;
+  }
+
   .bg-gradient {
     position: absolute;
     inset: 0;
@@ -36,42 +37,16 @@
       linear-gradient(170deg, #062060 0%, #041850 40%, #021030 100%);
   }
 
-  /* Orbs — static, no animation */
   .orb {
     position: absolute;
     border-radius: 50%;
     filter: blur(60px);
     pointer-events: none;
   }
-  .orb-1 {
-    width: 260px; height: 260px;
-    background: rgba(30, 70, 200, 0.5);
-    top: -80px; left: -80px;
-  }
-  .orb-2 {
-    width: 160px; height: 160px;
-    background: rgba(245, 127, 5, 0.1);
-    top: 160px; right: -40px;
-  }
-  .orb-3 {
-    width: 300px; height: 300px;
-    background: rgba(10, 50, 180, 0.4);
-    bottom: -60px; right: -80px;
-  }
-  .orb-4 {
-    width: 180px; height: 180px;
-    background: rgba(50, 100, 230, 0.28);
-    bottom: 200px; left: -50px;
-  }
-
-  /* Noise */
-  .noise {
-    position: absolute;
-    inset: 0;
-    opacity: 0.02;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-size: 128px 128px;
-  }
+  .orb-1 { width: 260px; height: 260px; background: rgba(30,70,200,0.5);   top: -80px;  left: -80px; }
+  .orb-2 { width: 160px; height: 160px; background: rgba(245,127,5,0.1);   top: 160px;  right: -40px; }
+  .orb-3 { width: 300px; height: 300px; background: rgba(10,50,180,0.4);   bottom: -60px; right: -80px; }
+  .orb-4 { width: 180px; height: 180px; background: rgba(50,100,230,0.28); bottom: 200px; left: -50px; }
 
   .content {
     position: relative;
@@ -82,43 +57,41 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 130px 80px;
+    padding: 0 36px;
   }
 
-  /* Header */
   .header {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .year-label {
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 4px;
-    color: rgba(202, 204, 237, 0.5);
+    color: rgba(202,204,237,0.5);
     text-transform: uppercase;
     margin-bottom: 4px;
   }
 
   .year-number {
-    font-size: 52px;
+    font-size: 56px;
     font-weight: 700;
-    color: rgba(220, 228, 255, 0.95);
+    color: rgba(220,228,255,0.95);
     letter-spacing: -2px;
     line-height: 1;
     text-shadow: 0 0 40px rgba(80,120,255,0.35);
   }
 
-  /* Day info */
   .day-info {
     display: flex;
     align-items: baseline;
     gap: 6px;
-    margin: 8px 0 20px;
+    margin: 8px 0 18px;
   }
 
   .day-big {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     color: #F57F05;
     letter-spacing: 0.5px;
@@ -126,14 +99,13 @@
   }
 
   .day-sub {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 400;
-    color: rgba(202, 204, 237, 0.38);
+    color: rgba(202,204,237,0.38);
     letter-spacing: 1.5px;
     text-transform: uppercase;
   }
 
-  /* Grid */
   .grid-container {
     width: 100%;
   }
@@ -141,45 +113,36 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(20, 1fr);
-    gap: 5px;
+    gap: 4px;
     width: 100%;
   }
 
   .day-cell {
     aspect-ratio: 1;
-    border-radius: 3px;
+    border-radius: 2px; /* just slightly rounded, not circular */
   }
 
-  /* Past — completed days */
   .day-cell.past {
     background: #002078;
-    box-shadow: inset 0 1px 0 rgba(60,100,220,0.3);
   }
 
-  /* Today */
   .day-cell.today {
     background: #F57F05;
-    border-radius: 4px;
+    border-radius: 2px;
     box-shadow:
-      0 0 8px rgba(245,127,5,0.9),
-      0 0 20px rgba(245,127,5,0.5),
-      0 0 40px rgba(245,127,5,0.2);
+      0 0 6px rgba(245,127,5,0.9),
+      0 0 14px rgba(245,127,5,0.5);
   }
 
-  /* Future — remaining days */
   .day-cell.future {
     background: #CACCED;
-    opacity: 0.78;
+    opacity: 0.75;
   }
-
-
 </style>
 </head>
 <body>
-
 <div id="wallpaper">
   <div class="bg-gradient"></div>
-  <div class="noise"></div>
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
@@ -200,7 +163,6 @@
       <div class="grid" id="dayGrid"></div>
     </div>
   </div>
-
 </div>
 
 <script>
@@ -208,11 +170,9 @@
     const start = new Date(date.getFullYear(), 0, 0);
     return Math.floor((date - start) / 86400000);
   }
-
   function isLeapYear(y) {
     return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
   }
-
   function buildWallpaper() {
     const today = new Date();
     const year = today.getFullYear();
@@ -228,17 +188,13 @@
     for (let d = 1; d <= totalDays; d++) {
       const cell = document.createElement('div');
       cell.className = 'day-cell';
-
-      if (d < dayOfYear)      cell.classList.add('past');
+      if (d < dayOfYear)        cell.classList.add('past');
       else if (d === dayOfYear) cell.classList.add('today');
-      else                     cell.classList.add('future');
-
+      else                      cell.classList.add('future');
       grid.appendChild(cell);
     }
   }
-
   buildWallpaper();
 </script>
-
 </body>
 </html>
