@@ -57,7 +57,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 50px 0;
+    padding: 32px 28px 0;
   }
 
   .header {
@@ -149,11 +149,6 @@
   <div class="orb orb-4"></div>
 
   <div class="content">
-    <div class="header">
-      <div class="year-label">Year in Days</div>
-      <div class="year-number" id="yearNum">2026</div>
-    </div>
-
     <div class="day-info">
       <span class="day-big" id="dayBig">Day 69</span>
       <span class="day-sub">of 365</span>
@@ -179,7 +174,6 @@
     const dayOfYear = getDayOfYear(today);
     const totalDays = isLeapYear(year) ? 366 : 365;
 
-    document.getElementById('yearNum').textContent = year;
     document.getElementById('dayBig').textContent = `Day ${dayOfYear}`;
 
     const grid = document.getElementById('dayGrid');
